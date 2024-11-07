@@ -8,7 +8,7 @@ const detailRestaurant= document.getElementById('detail-restaurant');
 const detailRating=document.getElementById('rating-display');
 const detailComment=document.getElementById('comment-display');
 const newRamenForm=document.getElementById('new-ramen');
-
+const editRamenForm=document.getElementById('edit-ramen');
 
 fetch(ramenURL)
 .then(res => res.json())
@@ -22,6 +22,7 @@ const ramenImage= document.createElement('img');
 ramenImage.src= ramen.image;
 ramenMenuDiv.append(ramenImage);
 ramenImage.addEventListener('click', () => handleClick(ramen))
+
 }
 function handleClick(ramen){
  detailImage.src= ramen.image
@@ -46,4 +47,16 @@ function addSubmitListener(e){
   };
   displayRamen(addSumbit);
   e.target.reset();
+}
+
+function editSubmitListener(e){
+e.preventDefault();
+editRamenForm.addEventListener('submit', () => editSubmitListener(ramen))
+
+const editSubmit={
+  rating: e.target.rating.value,
+  comment: e.target ['edit-comment'].value,  
+};
+displayRamen(editSubmit);
+e.target.reset();
 }
